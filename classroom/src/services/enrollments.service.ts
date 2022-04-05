@@ -22,4 +22,10 @@ export class EnrollmentsService {
       orderBy: { createdAt: 'desc' },
     });
   }
+
+  async findByCourseAndStudentId(courseId: string, studentId: string) {
+    return this.prisma.enrollment.findFirst({
+      where: { courseId, studentId, canceldAt: null },
+    });
+  }
 }
