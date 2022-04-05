@@ -7,4 +7,12 @@ export class StudentsService {
   async listAllStudents() {
     return this.prisma.student.findMany();
   }
+
+  async findStudentByID(id: string) {
+    return this.prisma.student.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
 }
