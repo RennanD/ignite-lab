@@ -5,8 +5,13 @@ import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 
 import { DatabaseModule } from '../database/database.module';
-import { TestResolver } from '../test-controller/test.resolver';
 import { ApolloDriver } from '@nestjs/apollo';
+import { StudentsResolver } from './graphql/resolvers/students.resolver';
+import { CoursesResolver } from './graphql/resolvers/courses.resolver';
+import { EnrollmentsResolver } from './graphql/resolvers/enrollments.resolver';
+import { StudentsService } from '../services/students.service';
+import { CoursesService } from '../services/courses.service';
+import { EnrollmentsService } from '../services/enrollments.service';
 
 @Module({
   imports: [
@@ -17,6 +22,15 @@ import { ApolloDriver } from '@nestjs/apollo';
       driver: ApolloDriver,
     }),
   ],
-  providers: [TestResolver],
+  providers: [
+    StudentsResolver,
+    CoursesResolver,
+    EnrollmentsResolver,
+
+    // Services
+    StudentsService,
+    CoursesService,
+    EnrollmentsService,
+  ],
 })
 export class HttpModule {}
