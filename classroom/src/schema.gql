@@ -31,3 +31,11 @@ type Query {
   courses: [Course!]!
   enrollments: [Enrollment!]!
 }
+
+type Mutation {
+  crateCourse(data: CreateCourseInput!): Course!
+}
+
+input CreateCourseInput {
+  title: String!
+}
