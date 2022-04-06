@@ -5,6 +5,7 @@ import { PrismaService } from '../database/prisma/prisma.service';
 
 interface CreateCourseData {
   title: string;
+  slug?: string;
 }
 
 @Injectable()
@@ -22,11 +23,19 @@ export class CoursesService {
     });
   }
 
-  async createCourse({ title }: CreateCourseData) {
-    const slug = slugify(title, { lower: true });
+  async findCourseBySlug(slug: string) {
+    return this.prisma.course.findUnique({
+      where: {
+        slug,
+      },
+    });
+  }
+
+  async createCourse({ title, slug }: CreateCourseData) {
+    const courselug = slug || slugify(title, { lower: true });
 
     const courseWithSameSlug = await this.prisma.course.findUnique({
-      where: { slug },
+      where: { slug: courselug },
     });
 
     if (courseWithSameSlug) {
@@ -36,7 +45,7 @@ export class CoursesService {
     return this.prisma.course.create({
       data: {
         title,
-        slug,
+        slug: courselug,
       },
     });
   }
