@@ -2,21 +2,8 @@
 
 import { gql, useQuery } from '@apollo/client';
 
-import {
-  getAccessToken,
-  useUser,
-  withPageAuthRequired,
-} from '@auth0/nextjs-auth0';
+import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { withApollo } from '../../services/withApollo';
-
-const PRODUCTS_QUERY = gql`
-  query GetProducts {
-    products {
-      id
-      title
-    }
-  }
-`;
 
 function Home(): JSX.Element {
   const { user } = useUser();
@@ -34,9 +21,7 @@ function Home(): JSX.Element {
 }
 
 export const getServerSideProps = withPageAuthRequired({
-  getServerSideProps: async ({ req, res }) => {
-    console.log(getAccessToken(req, res));
-
+  getServerSideProps: async () => {
     return {
       props: {},
     };
