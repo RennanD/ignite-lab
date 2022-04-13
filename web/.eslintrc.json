@@ -29,6 +29,7 @@
     "react-hooks/rules-of-hooks": "error",
     "react/prop-types": "off",
     "react/require-default-props": "off",
+    "jsx-a11y/no-redundant-roles": "off",
     "camelcase": "off",
     "react/no-array-index-key": "off",
     "react/destructuring-assignment": "off",
